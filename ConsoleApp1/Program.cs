@@ -5,11 +5,11 @@ using System.Reflection.Metadata;
 
 internal class Program
 {
-    class Flower
+    class Flower//товар магазину
     {
-        String Name;
-        int Price;
-        string Article;
+       private String Name;
+       private int Price;
+       private string Article;
 
         public Flower(string name, int price, string article)
         {
@@ -31,28 +31,28 @@ internal class Program
 
 
 
-    class FlowerShop
+    class FlowerShop//магазин квіток
     {
-        string Address;
-        string Name;
-        Collection<Flower> Flowers;
-        Collection<FlowerShopEmployee> FlowerShopEmployees;
+        private string Address;
+        private string Name;
+        private Collection<Flower> Flowers;
+        private Collection<Employee> Employees;
 
-        public FlowerShop(string address, string name, Collection<Flower> flowers, Collection<FlowerShopEmployee> flowerShopEmployees)
+        public FlowerShop(string address, string name, Collection<Flower> flowers, Collection<Employee> employees)
         {
             this.Address = address;
             this.Name = name;
             this.Flowers = flowers;
-            this.FlowerShopEmployees = flowerShopEmployees;
+            this.Employees = employees;
         }
-        public void addEmployee(FlowerShopEmployee flowerShopEmployee)
+        public void addEmployee(Employee flowerShopEmployee)
         {
-            this.FlowerShopEmployees.Add(flowerShopEmployee);
+            this.Employees.Add(flowerShopEmployee);
         }
 
-        public FlowerShopEmployee GetEmployeeByID(string ID_search)
+        public Employee GetEmployeeByID(string ID_search)
         {
-            foreach (var Emp in FlowerShopEmployees)
+            foreach (var Emp in Employees)
             {
                 if (ID_search == Emp.getID())
                 {
@@ -61,9 +61,9 @@ internal class Program
             }
             return null;
         }
-        public void fireEmployeeById(string ID_search)
+        public void fireEmployeeById(string ID_search)//звільнити робітника
         {
-            foreach (var Emp in FlowerShopEmployees)
+            foreach (var Emp in Employees)
             {
                 if (ID_search == Emp.getID())
                 {
@@ -76,17 +76,17 @@ internal class Program
         }
     }
 
-    class FlowerShopEmployee
+    class Employee
     {
         private string ID;
-        string Name;
-        int Age;
+        private string Name;
+        private int Age;
         //position toggle(or whatever) should be added
-        FlowerShopEmployeePosition employeePosition;
-        bool isWorking;
+        private FlowerShopEmployeePosition employeePosition;
+        private bool isWorking;
 
 
-        FlowerShopEmployee(string codeOfEmloyee, string name, int age, FlowerShopEmployeePosition employeePosition)
+        Employee(string codeOfEmloyee, string name, int age, FlowerShopEmployeePosition employeePosition)//створення працівника
         {
             ID = codeOfEmloyee;
             Name = name;
@@ -94,7 +94,7 @@ internal class Program
             this.employeePosition = employeePosition;
             bool isWorking = true;
         }
-        FlowerShopEmployee()
+        Employee()//створення працівника через консоль(потрібність в проекті цього метода саме в цьому классі не доведена)
         {
             Console.WriteLine("name of the worker:");
             this.Name = Console.ReadLine();
@@ -119,11 +119,11 @@ internal class Program
 
     }
 
-    enum FlowerShopEmployeePosition { StockWorker, Seller, Administrator }
+    enum FlowerShopEmployeePosition { StockWorker, Seller, Administrator }//перерахування можливих позицій робітника
 
-    class Prog
+    class Prog//клас програми(щоб мінімізувати код в Main)
     {
-        Collection<FlowerShop> flowerShops;
+        private Collection<FlowerShop> flowerShops;
         public void Start()
         {
 
