@@ -7,9 +7,9 @@ internal class Program
 {
     class Flower//товар магазину
     {
-       private String Name;
-       private int Price;
-       private string Article;
+        private String Name;
+        private int Price;
+        private string Article;
 
         public Flower(string name, int price, string article)
         {
@@ -35,8 +35,8 @@ internal class Program
     {
         private string Address;
         private string Name;
-        private Collection<Flower> Flowers;
-        private Collection<Employee> Employees;
+        private Collection<Flower>? Flowers;
+        private Collection<Employee>? Employees;
 
         public FlowerShop(string address, string name, Collection<Flower> flowers, Collection<Employee> employees)
         {
@@ -45,12 +45,37 @@ internal class Program
             this.Flowers = flowers;
             this.Employees = employees;
         }
-        public void addEmployee(Employee flowerShopEmployee)
+
+        public FlowerShop()
+        {
+      
+            if(this.Name == null)
+            {
+                Console.WriteLine("enter the name of the shop:");
+                this.Name = Console.ReadLine();
+            }
+            if (this.Address == null)
+            {
+                Console.WriteLine("enter the address of the shop:");
+                this.Address = Console.ReadLine();
+            }
+            
+
+
+        }
+
+        public void addEmployee(Employee flowerShopEmployee)//додавання працівника до штату через код
         {
             this.Employees.Add(flowerShopEmployee);
         }
+        
+        public void addEmployee()//додавання працівника до штату через консоль
+        {
 
-        public Employee GetEmployeeByID(string ID_search)
+        }
+
+
+        public Employee getEmployeeByID(string ID_search)
         {
             foreach (var Emp in Employees)
             {
@@ -61,17 +86,17 @@ internal class Program
             }
             return null;
         }
-        public void fireEmployeeById(string ID_search)//звільнити робітника
+        public void fireEmployeeById(string idForSearching)//звільнити робітника
         {
             foreach (var Emp in Employees)
             {
-                if (ID_search == Emp.getID())
+                if (idForSearching == Emp.getID())
                 {
                     Emp.changeStatusToFired();
                     Console.WriteLine("this employee has been fired successfully");
                 }
             }
-            Console.WriteLine("we have not found the worker");  
+            Console.WriteLine("we have not found the worker");
 
         }
     }
@@ -124,13 +149,13 @@ internal class Program
     class Prog//клас програми(щоб мінімізувати код в Main)
     {
         private Collection<FlowerShop> flowerShops;
-        public void Start()
+        public void Start() //стартова сторінка програми; створення першого магазину
         {
-
+            FlowerShop startingFlowerShop = new FlowerShop();
         }
         public Prog()
         {
-
+            Start();
         }
 
     }
